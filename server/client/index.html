@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <script type="module">
+        import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+
+        const socket = io()
+        const form = document.getElementById('form')
+        const title = document.getElementById('title')
+        const message = document.getElementById('message')
+        const messages = document.getElementById('messages')
+
+        socket.on('message', ({title, message} ) => {
+            const item = `<li>
+                <p>${title}</p>
+                <small>${message}</small>
+                </li>`
+            messages.insertAdjacentHTML('beforeend', item )
+            messages.scrollTop = messages.scrollHeight
+        })
+
+        form.addEventListener('submit', (e) => {
+            const notificacion = {title: title.value, message: message.value }
+            e.preventDefault()
+            if (title.value && message.value) {
+                socket.emit('message', notificacion)
+                title.value =''
+                message.value =''
+            }
+        })
+    </script>
+    <title>Enviar notificacion</title>
+</head>
+<body>
+    <section id="notificacion">
+        <ul id="messages"></ul>
+        <form id="form">
+            <label for="title"> Titulo</label>
+            <input type="text" name='title' id='title' placeholder="El sistema esta caido..." autocomplete="off">
+            <label for="message"> Mensaje</label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+</body>
+</html>
