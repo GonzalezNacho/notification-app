@@ -13,12 +13,12 @@ def disconnect():
 
 
 @sio.event
-def message(args):
+def message(*args):
     notification = Notify()
-    notification.title = args['title']
-    notification.message = args['message']
+    notification.title = args[0]
+    notification.message = args[1]
     notification.send()
-    print('message', args['title'], args['message'])
+    print('message', args[0], args[1])
 
 
 def main():

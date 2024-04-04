@@ -13,7 +13,7 @@
         const message = document.getElementById('message')
         const messages = document.getElementById('messages')
 
-        socket.on('message', ({title, message} ) => {
+        socket.on('message', (title, message ) => {
             const item = `<li>
                 <p>${title}</p>
                 <small>${message}</small>
