@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <link rel="stylesheet" href="style.css">
     <script type="module">
         import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 
@@ -15,7 +15,7 @@
 
         socket.on('message', (title, message ) => {
             const item = `<li>
-                <p>${title}</p>
+                <a>${title}</a>
                 <small>${message}</small>
                 </li>`
             messages.insertAdjacentHTML('beforeend', item )
@@ -35,15 +35,15 @@
     <title>Enviar notificacion</title>
 </head>
 <body>
+    <form id="form">
+        <label for="title"> Titulo</label>
+        <input type="text" name='title' id='title' placeholder="El sistema esta caido..." autocomplete="off">
+        <label for="message"> Mensaje</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
     <section id="notificacion">
         <ul id="messages"></ul>
-        <form id="form">
-            <label for="title"> Titulo</label>
-            <input type="text" name='title' id='title' placeholder="El sistema esta caido..." autocomplete="off">
-            <label for="message"> Mensaje</label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
-            <button type="submit">Enviar</button>
-        </form>
     </section>
 </body>
 </html>

@@ -27,6 +27,10 @@ app.get('/', (req,res) => {
     res.sendFile(process.cwd() + '/client/index.html')
 })
 
+app.get('/style.css', (req,res) => {
+    res.sendFile(process.cwd() + '/client/css/style.css')
+})
+
 server.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`)
 })
